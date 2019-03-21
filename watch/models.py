@@ -44,5 +44,40 @@ class Business(models.Model):
 
 class HealthCenter(models.Model):
    '''
-
+   To hold data on health center's
    '''
+
+   name = models.CharField(max_length=50)
+   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+   tel = models.IntegerField()
+   email = models.EmailField(max_length=254)
+
+   def __str__(self):
+      return self.name
+
+class Police(models.Model):
+   '''
+   Hold details of police authorities in neighbourhood.
+   '''
+
+   name = models.CharField(max_length=50)
+   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+   tel = models.IntegerField()
+   email = models.EmailField(max_length=254)
+
+   def __str__(self):
+      return self.name
+
+class Post(models.Model):
+   '''
+   Hold post data.
+   '''
+
+   content = models.CharField(max_length=280)
+   # category = models.ForeignKey(Category, on_delete=models.CASCADE)
+   author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.content
+
