@@ -6,7 +6,6 @@ class Location(models.Model):
    '''
    Hold location data
    '''
-
    name = models.CharField(max_length=50)
 
    def __str__(self):
@@ -29,15 +28,16 @@ class Profile(models.Model):
    Holds user's profile data.
    '''
 
-
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   avatar = models.ImageField(upload_to='avatars/')
+   avatar = models.ImageField(upload_to='avatars/',default='default.jpg')
    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
 
    def __str__(self):
       return self.user.username
 
-
+class Category(models.Model):
+   '''
+   '''
 
 class Business(models.Model):
    '''
@@ -48,10 +48,13 @@ class Business(models.Model):
    email = models.EmailField(max_length=254)
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
    category = models.CharField(max_length=50)
-   owner = models.ForeignKey(on_delete=models.CASCADE)
+   owner = models.ForeignKey(Profile,on_delete=models.CASCADE)
 
    def __str__(self):
       return self.name
+
+   class Meta:
+      verbose_name_plural = "Businesses"
 
 class Amenities(models.Model):
    '''
@@ -68,7 +71,7 @@ class Amenities(models.Model):
       return self.name
 
    class Meta:
-      verbose_plural_name = 'Amenities'
+      verbose_name_plural = 'Amenities'
 
 class Post(models.Model):
    '''
@@ -79,7 +82,19 @@ class Post(models.Model):
    # category = models.ForeignKey(Category, on_delete=models.CASCADE)
    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+   category = models.CharField(max_length=50,default='General')
 
    def __str__(self):
       return self.content
 
+class Comment(models.Model):
+   '''
+   Hold post comment data
+   '''
+
+   comment = models.CharField(max_length=50)
+   comment_on = models.ForeignKey(Post, on_delete=models.CASCADE)
+   comment_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.comment
