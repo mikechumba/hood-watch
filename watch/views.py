@@ -6,7 +6,7 @@ from .forms import *
 # Create your views here.
 def landing(request):
 
-   return render(request, 'watch/landing.html')
+   return render(request,'watch/landing.html')
 
 def register(request):
 
@@ -31,7 +31,7 @@ def register(request):
       'form': form
    }
 
-   return render(request, 'registration/register.html',context)
+   return render(request,'registration/register.html',context)
 
 def edit_profile(request):
 
@@ -66,3 +66,8 @@ def profile(request):
    }
 
    return render(request,'watch/profile.html',context)
+
+
+def logout_view(request):
+   logout(request)
+   return redirect('login')

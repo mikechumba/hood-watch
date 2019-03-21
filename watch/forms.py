@@ -22,3 +22,11 @@ class ProfileUpdateForm(forms.ModelForm):
       model = Profile
       fields = ['avatar','neighbourhood']
 
+class LoginForm(AuthenticationForm):
+   '''
+   To handle user login
+   '''
+
+   class Meta:
+      model = User
+      fields = ['username','password']
