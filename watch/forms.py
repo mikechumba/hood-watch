@@ -12,3 +12,13 @@ class Registration(UserCreationForm):
    class Meta(UserCreationForm.Meta):
       model = User
       fields = UserCreationForm.Meta.fields + ('first_name','last_name','email','username','password')
+
+class ProfileUpdateForm(forms.ModelForm):
+   '''
+   To edit user's profile
+   '''
+
+   class Meta:
+      model = Profile
+      fields = ['avatar','neighbourhood']
+

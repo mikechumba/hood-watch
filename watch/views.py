@@ -31,4 +31,38 @@ def register(request):
       'form': form
    }
 
-   return render(request, 'registration/register.html')
+   return render(request, 'registration/register.html',context)
+
+def edit_profile(request):
+
+   title = 'Edit Profile'
+
+   user = request.user
+
+   if request.method == 'POST':
+      form = ProfileUpdateForm(request.POST,request.FILES,instance=user.profile)
+      if form.is_valid():
+         form.save()
+         return redirect('profile')
+   else:
+      form = ProfileUpdateForm(instance=user.profile)
+
+   context = {
+      'title': title,
+      'form': form
+   }
+
+   return render(request,'dash/edit_profile.html',context)
+
+
+def profile(request):
+
+   user = request.user
+
+   title = f'{user.first_name} {user.last_name}'
+
+   context = {
+      'title': title
+   }
+
+   return render(request,'watch/profile.html',context)
