@@ -1,0 +1,9 @@
+$font: 'Work Sans', sans-serif;
+
+@mixin fonts($color,$size,$weight,$family) {
+   font-family: $family;
+   font-size: $size;
+   font-weight: $weight;
+   color: $color;
+}
+

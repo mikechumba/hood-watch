@@ -1,0 +1,21 @@
+$font-sizes: (
+   'xs': 10px,
+   's': 12px,
+   'm': 14px,
+   'l': 20px,
+   'xl': 28px
+);
+
+$colors: (
+   'prmry': #333,
+   'scndry': #fff,
+);
+
+@function fz($value) {
+   @return map-get($font-sizes,$value);
+}
+
+@function clr($value) {
+   @return map-get($colors,$value);
+}
+
