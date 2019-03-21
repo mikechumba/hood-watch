@@ -29,6 +29,7 @@ class Profile(models.Model):
       return self.user.username
 
 
+
 class Business(models.Model):
    '''
    Holds info on businesses in each neighbourhood
@@ -37,36 +38,27 @@ class Business(models.Model):
    name = models.CharField(max_length=50)
    email = models.EmailField(max_length=254)
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-   category = models.ForeignKey(Category,)
+   category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
    def __str__(self):
       return self.name
 
-class HealthCenter(models.Model):
+class Amenities(models.Model):
    '''
-   To hold data on health center's
+   To hold data on a neighbourhood's public amenities
    '''
 
    name = models.CharField(max_length=50)
-   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
    tel = models.IntegerField()
    email = models.EmailField(max_length=254)
+   amenity_type = models.CharField(max_length=50)
+   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
 
    def __str__(self):
       return self.name
 
-class Police(models.Model):
-   '''
-   Hold details of police authorities in neighbourhood.
-   '''
-
-   name = models.CharField(max_length=50)
-   hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-   tel = models.IntegerField()
-   email = models.EmailField(max_length=254)
-
-   def __str__(self):
-      return self.name
+   class Meta:
+      verbose_plural_name = 'Amenities'
 
 class Post(models.Model):
    '''
