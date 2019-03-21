@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Location(models.Model):
+   '''
+   Hold location data
+   '''
+
+   name = models.CharField(max_length=50)
+
+   def __str__(self):
+      return self.name
 
 class Neighbourhood(models.Model):
    '''
@@ -9,7 +18,7 @@ class Neighbourhood(models.Model):
    '''
 
    name = models.CharField(max_length=50)
-   location = models.CharField(max_length=50)
+   location = models.ForeignKey(Location, on_delete=models.CASCADE)
    admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
    def __str__(self):
@@ -38,7 +47,8 @@ class Business(models.Model):
    name = models.CharField(max_length=50)
    email = models.EmailField(max_length=254)
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-   category = models.ForeignKey(Category,on_delete=models.CASCADE)
+   category = models.CharField(max_length=50)
+   owner = models.ForeignKey(on_delete=models.CASCADE)
 
    def __str__(self):
       return self.name
