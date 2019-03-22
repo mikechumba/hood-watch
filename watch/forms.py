@@ -30,3 +30,64 @@ class LoginForm(AuthenticationForm):
    class Meta:
       model = User
       fields = ['username','password']
+
+class NeighbourhoodForm(forms.ModelForm):
+   '''
+   To add new neighbourhood data.
+   '''
+
+   class Meta:
+      model = Neighbourhood
+      fields = ['name','location']
+
+class BusinessForm(forms.ModelForm):
+   '''
+   To add a new business
+   '''
+
+   class Meta:
+      model = Business
+      fields = ['name','category','email','tel']
+
+class PostForm(forms.ModelForm):
+   '''
+   To add a post
+   '''
+
+   CATEGORIES = (
+      ('Alert','Alert'),
+      ('General','General'),
+      ('Announcement','Announcement'),
+   )
+   category = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
+
+   class Meta:
+      model = Post
+      fields = ['content','category']
+      widget = {
+         'content': forms.TextInput(attrs={'placeholder': 'Add a Post'}),
+      }
+
+class AmenitiesForm(forms.ModelForm):
+   '''
+   To add public amenities.
+   '''
+   CATEGORIES = (
+      ('Hospital','Hospital'),
+      ('Police','Police'),
+      ('Park','Park'),
+      ('School','School')
+   )
+   amenity_type = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
+   class Meta:
+      model = Amenities
+      fields = ['name','tel','email','amenity_type','hood']
+
+class CommentForm(forms.ModelForm):
+   '''
+   To add comment to post
+   '''
+
+   class Meta:
+      model = Comment
+      fields = ['comment']

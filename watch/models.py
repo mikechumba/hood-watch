@@ -30,7 +30,7 @@ class Profile(models.Model):
 
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    avatar = models.ImageField(upload_to='avatars/',default='default.jpg')
-   neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+   neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, null=True)
 
    def __str__(self):
       return self.user.username
@@ -55,6 +55,7 @@ class Business(models.Model):
 
    name = models.CharField(max_length=50)
    email = models.EmailField(max_length=254)
+   tel = models.IntegerField()
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
    category = models.ForeignKey(Category, on_delete=models.CASCADE)
    owner = models.ForeignKey(Profile,on_delete=models.CASCADE)
@@ -88,7 +89,6 @@ class Post(models.Model):
    '''
 
    content = models.CharField(max_length=280)
-   # category = models.ForeignKey(Category, on_delete=models.CASCADE)
    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
    category = models.CharField(max_length=50,default='General')
