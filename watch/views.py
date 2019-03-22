@@ -8,6 +8,37 @@ def landing(request):
 
    return render(request,'watch/landing.html')
 
+
+def feed(request):
+
+   title = 'Feed'
+
+   context = {
+      'title': title
+   }
+
+   return render(request,'watch/feed.html',context)
+
+def dashboard(request):
+
+   title = f'Dashboard'
+
+   context = {
+      'title': title
+   }
+
+   return render(request,'watch/dashboard.html',context)
+
+def hood_change(request):
+
+   title = f'Change Neighbourhood'
+
+   context = {
+      'title': title
+   }
+
+   return render(request,'dash/hood_change.html',context)
+
 def register(request):
 
    title = 'Sign Up'
