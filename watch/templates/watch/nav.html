@@ -1,7 +1,10 @@
 {% load static %}
 <nav>
    <div class="search">
-      <form action="" method="get">
+      <form action="{% url 'search' %}" method="get">
+         <div class="icon">
+            <img src="{% static 'svg/path-1445.svg' %}" alt="">
+         </div>
          <input type="text" name="biz_search" placeholder="Search">
       </form>
    </div>

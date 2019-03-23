@@ -24,49 +24,86 @@
                   </a>
                </div>
             </div>
-            
-            {% for post in posts %}
-               <div class="alert">
-                  {% if post.category == 'Alert' %}
+            <div class="posts">
+              
+               <div class="alerts">
+                  <div class="post-icon">
+                     <div class="icon">
+                        <img src="{% static 'svg/warning.svg' %}" alt="">
+                     </div>
+                     <p>Alerts</p>
+                  </div>
+                  {% for alert in alerts  %}
                      <div class="post-card-sm">
                         <div class="author">
                            <div class="avatar-sm">
-                              <img src="{{ post.author.avatar.url }}" alt="">
+                              <img src="{{ alert.author.avatar.url }}" alt="">
                            </div>
-                           <p>{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
+                           <p>{{ alert.author.user.first_name }} {{ alert.author.user.last_name }}</p>
                         </div>
                         <div class="post-content">
-                           <p>{{ post.content }}</p>
+                           <p>{{ alert.content }}</p>
                         </div>
                         <div class="post-comments">
-                           <p>{{ post.comment_set.count }} comments</p>
+                           <p>{{ alert.comment_set.count }} comments</p>
                         </div>
                      </div>
-                  {% endif %}
-                  
+                  {% endfor %}
                </div>
 
                <div class="general">
-                  {% if post.category == 'General' %}
+                  <div class="post-icon">
+                     <div class="icon">
+                        <img src="{% static 'svg/spin.svg' %}" alt="">
+                     </div>
+                     <p>General</p>
+                  </div>
+                  {% for general in general  %}
                      <div class="post-card-sm">
                         <div class="author">
                            <div class="avatar-sm">
-                              <img src="{{ post.author.avatar.url }}" alt="">
+                              <img src="{{ general.author.avatar.url }}" alt="">
                            </div>
-                           <p>{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
+                           <p>{{ general.author.user.first_name }} {{ general.author.user.last_name }}</p>
                         </div>
                         <div class="post-content">
-                           <p>{{ post.content }}</p>
+                           <p>{{ general.content }}</p>
                         </div>
                         <div class="post-comments">
-                           <p>{{ post.comment_set.count }} comments</p>
+                           <p>{{ general.comment_set.count }} comments</p>
                         </div>
                      </div>
-                  {% endif %}
-               </div> 
+                  {% endfor %}
+               </div>
 
-            {% endfor %}
+               <div class="announcement">
+                  <div class="post-icon">
+                     <div class="icon">
+                        <img src="{% static 'svg/calendar.svg' %}" alt="">
+                     </div>
+                     <p>Announcements</p>
+                  </div>
+                  {% for ann in announcements  %}
+                     <div class="post-card-sm">
+                        <div class="author">
+                           <div class="avatar-sm">
+                              <img src="{{ ann.author.avatar.url }}" alt="">
+                           </div>
+                           <p>{{ ann.author.user.first_name }} {{ ann.author.user.last_name }}</p>
+                        </div>
+                        <div class="post-content">
+                           <p>{{ ann.content }}</p>
+                        </div>
+                        <div class="post-comments">
+                           <p>{{ ann.comment_set.count }} comments</p>
+                        </div>
+                     </div>
+                  {% endfor %}
+               </div>
+   
+   
 
+            </div>
          </div>
       </div>
 

@@ -14,7 +14,32 @@ nav {
    border-bottom: 1px solid rgba(#ccc,0.9);
    height: 7vh;
    input {
-      padding: 8px 8px;
+      box-sizing: border-box;
+      padding: 6px 8px;
+      border: none;
+      &:focus {
+         outline: none;
+         border: none;
+      }
+   }
+}
+
+.search {
+   align-self: center;
+   box-sizing: border-box;
+   width: 14%;
+   form {
+      display: flex;
+   }
+}
+
+.logo {
+   align-self: center;
+   width: 15px;
+   height: 20px;
+   margin: 0 auto;
+   img {
+      width: 100%;
    }
 }
 
@@ -138,5 +163,31 @@ p {
          height: 16px;
          vertical-align: middle;
       }
+   }
+}
+
+.posts {
+   display: flex;
+   justify-content: space-between;
+}
+
+.post-card-sm {
+   background-color: #fff;
+   .post-comments {
+      &::before {
+         content: '';
+         display: block;
+         border: 0.5px solid rgba(#ccc,0.2);
+         width: 98%;
+         margin: 0 auto;
+      }
+   }
+}
+
+.author {
+   display: flex;
+   align-items: center;
+   p {
+      margin-left: 2%;
    }
 }

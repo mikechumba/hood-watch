@@ -4,22 +4,21 @@ from .models import *
 from .forms import *
 
 # Create your views here.
-def landing(request):
-
-   return render(request,'watch/landing.html')
-
-
 def feed(request):
 
    hood = request.user.profile.neighbourhood
 
    title = f'Feed | {hood}'
 
-   posts = Post.objects.filter(hood=request.user.profile.neighbourhood).all()
+   alerts = Post.objects.filter(hood=request.user.profile.neighbourhood,category='Alert').all()
+   general = Post.objects.filter(hood=request.user.profile.neighbourhood,category='General').all()
+   announcements = Post.objects.filter(hood=request.user.profile.neighbourhood,category='Announcement').all()
 
    context = {
       'title': title,
-      'posts': posts
+      'alerts': alerts,
+      'general': general,
+      'announcements': announcements
    }
 
    return render(request,'watch/feed.html',context)
@@ -67,6 +66,22 @@ def new_post(request):
    }
 
    return render(request,'watch/new_post.html',context)
+
+def search(request):
+
+   if 'biz_search' in request.GET and request.GET['biz_search']:
+      searched = request.GET.get('biz_search')
+      if searched:
+         businesses = Business.objects.filter(name__icontains=searched).all()
+         title = f'Your search {searched} returned'
+
+   context = {
+      'businesses': businesses,
+      'title': title,
+      'searched': 'searched'
+   }
+
+   return render(request,'watch/search.html')
 
 def register(request):
 

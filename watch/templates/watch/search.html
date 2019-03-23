@@ -1,0 +1,51 @@
+{% extends "watch/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+   {% include "watch/nav.html" %}
+
+   <div class="page">
+
+      {% include "watch/sidebar.html" %}
+
+      <div class="main">
+         <div class="content">
+            <div class="top">
+               <div class="current-hood">
+                  <div class="icon-md">
+                     <img src="{% static 'svg/map-pin-stroke-white.svg' %}" alt="">
+                  </div>
+                  <p>{{user.profile.neighbourhood.name }}</p>
+               </div>
+               <div class="new-post-btn">
+                  <a href="{% url 'new_post' %}">
+                     <button><img src="{% static 'svg/plus-alt.svg' %}" alt=""> Add Business</button>
+                  </a>
+               </div>
+            </div>
+            <div class="posts">
+              
+               <div class="businesses">
+                  <div class="post-icon">
+                     <div class="icon">
+                        <img src="{% static 'svg/warning.svg' %}" alt="">
+                     </div>
+                     <p>Alerts</p>
+                  </div>
+                  {% for biz in businesses  %}
+                     <div class="post-card-sm">
+                        <h4>{{ biz.name }}</h4>
+                        <p>{{ biz.category }}</p>
+                     </div>
+                  {% endfor %}
+               </div>
+   
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+  
+{% endblock content %}
