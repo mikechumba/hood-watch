@@ -5,6 +5,72 @@
 
    {% include "watch/nav.html" %}
 
-   {% include "watch/sidebar.html" %}
+   <div class="page">
+
+      {% include "watch/sidebar.html" %}
+
+      <div class="main">
+         <div class="content">
+            <div class="top">
+               <div class="current-hood">
+                  <div class="icon-md">
+                     <img src="{% static 'svg/map-pin-stroke-white.svg' %}" alt="">
+                  </div>
+                  <p>{{user.profile.neighbourhood.name }}</p>
+               </div>
+               <div class="new-post-btn">
+                  <a href="{% url 'new_post' %}">
+                     <button><img src="{% static 'svg/plus-alt.svg' %}" alt=""> Add Post</button>
+                  </a>
+               </div>
+            </div>
+            
+            {% for post in posts %}
+               <div class="alert">
+                  {% if post.category == 'Alert' %}
+                     <div class="post-card-sm">
+                        <div class="author">
+                           <div class="avatar-sm">
+                              <img src="{{ post.author.avatar.url }}" alt="">
+                           </div>
+                           <p>{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
+                        </div>
+                        <div class="post-content">
+                           <p>{{ post.content }}</p>
+                        </div>
+                        <div class="post-comments">
+                           <p>{{ post.comment_set.count }} comments</p>
+                        </div>
+                     </div>
+                  {% endif %}
+                  
+               </div>
+
+               <div class="general">
+                  {% if post.category == 'General' %}
+                     <div class="post-card-sm">
+                        <div class="author">
+                           <div class="avatar-sm">
+                              <img src="{{ post.author.avatar.url }}" alt="">
+                           </div>
+                           <p>{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
+                        </div>
+                        <div class="post-content">
+                           <p>{{ post.content }}</p>
+                        </div>
+                        <div class="post-comments">
+                           <p>{{ post.comment_set.count }} comments</p>
+                        </div>
+                     </div>
+                  {% endif %}
+               </div> 
+
+            {% endfor %}
+
+         </div>
+      </div>
+
+   </div>
+
   
 {% endblock content %}

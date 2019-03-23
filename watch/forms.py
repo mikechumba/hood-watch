@@ -55,6 +55,7 @@ class PostForm(forms.ModelForm):
    '''
 
    CATEGORIES = (
+      ('', 'Select a Category'),
       ('Alert','Alert'),
       ('General','General'),
       ('Announcement','Announcement'),

@@ -1,6 +1,6 @@
-$font: 'Work Sans', sans-serif;
+$font: 'Khula', sans-serif;
 
-@mixin fonts($color,$size,$weight,$family) {
+@mixin fonts($color,$size,$weight: 400,$family: $font) {
    font-family: $family;
    font-size: $size;
    font-weight: $weight;

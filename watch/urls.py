@@ -9,5 +9,6 @@ urlpatterns = [
    path('login/',auth_views.LoginView.as_view(authentication_form=LoginForm,extra_context={'title': 'Login'}),name='login'),
    path('logout/',views.logout_view,name='logout'),
    path('profile/',views.profile,name='profile'),
+   path('post/new',views.new_post,name='new_post'),
    path('profile/edit',views.edit_profile,name='edit_profile')
 ]

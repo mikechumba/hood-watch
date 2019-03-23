@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate,logout
 from .models import *
 from .forms import *
@@ -11,12 +11,15 @@ def landing(request):
 
 def feed(request):
 
-   title = 'Feed'
+   hood = request.user.profile.neighbourhood
 
-   
+   title = f'Feed | {hood}'
+
+   posts = Post.objects.filter(hood=request.user.profile.neighbourhood).all()
 
    context = {
-      'title': title
+      'title': title,
+      'posts': posts
    }
 
    return render(request,'watch/feed.html',context)
@@ -40,6 +43,30 @@ def hood_change(request):
    }
 
    return render(request,'dash/hood_change.html',context)
+
+def new_post(request):
+
+   hood = request.user.profile.neighbourhood
+
+   title = f"New Post in {hood}"
+
+   if request.method == 'POST':
+      form = PostForm(request.POST)
+      if form.is_valid():
+         post = form.save(commit=False)
+         post.author = request.user.profile
+         post.hood = request.user.profile.neighbourhood
+         post.save()
+         return redirect('feed')
+   else:
+      form = PostForm()
+   
+   context = {
+      'title': title,
+      'form': form,
+   }
+
+   return render(request,'watch/new_post.html',context)
 
 def register(request):
 
