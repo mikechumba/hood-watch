@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="sidebar">
+
+   <div class="current-profile">
+      <div class="avatar-sm">
+         <img src="{{ user.profile.avatar.url }}" alt="">
+      </div>
+      <p>{{ user.first_name }} {{ user.last_name }}</p>
+   </div>
+
+</div>

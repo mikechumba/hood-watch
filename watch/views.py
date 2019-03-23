@@ -13,6 +13,8 @@ def feed(request):
 
    title = 'Feed'
 
+   
+
    context = {
       'title': title
    }
