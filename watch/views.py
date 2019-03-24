@@ -10,15 +10,15 @@ def feed(request):
 
    title = f'Feed | {hood}'
 
-   alerts = Post.objects.filter(hood=request.user.profile.neighbourhood,category='Alert').all()
-   general = Post.objects.filter(hood=request.user.profile.neighbourhood,category='General').all()
-   announcements = Post.objects.filter(hood=request.user.profile.neighbourhood,category='Announcement').all()
+   posts = Post.objects.filter(hood=hood)
+   businesses = Business.objects.filter(hood=hood)
+   amenities = Amenities.objects.filter(hood=hood)
 
    context = {
       'title': title,
-      'alerts': alerts,
-      'general': general,
-      'announcements': announcements
+      'posts': posts,
+      'businesses': businesses,
+      'amenities': amenities
    }
 
    return render(request,'watch/feed.html',context)
@@ -67,6 +67,29 @@ def new_post(request):
 
    return render(request,'watch/new_post.html',context)
 
+
+def new_business(request):
+
+   title = f'Add a New Business in {request.user.profile.neighbourhood}'
+
+   if request.method == 'POST':
+      form = BusinessForm(request.POST)
+      if form.is_valid():
+         business = form.save(commit=False)
+         business.owner = request.user.profile
+         business.hood = request.user.profile.neighbourhood
+         business.save()
+         return redirect('feed')
+   else:
+      form = BusinessForm()
+
+   context =  {
+      'form': form,
+      'title': title
+   }
+
+   return render(request,'watch/new_business.html',context)
+
 def search(request):
 
    if 'biz_search' in request.GET and request.GET['biz_search']:
@@ -78,7 +101,7 @@ def search(request):
    context = {
       'businesses': businesses,
       'title': title,
-      'searched': 'searched'
+      'searched': searched
    }
 
    return render(request,'watch/search.html')

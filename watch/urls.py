@@ -11,5 +11,6 @@ urlpatterns = [
    path('profile/',views.profile,name='profile'),
    path('post/new',views.new_post,name='new_post'),
    path('profile/edit',views.edit_profile,name='edit_profile'),
-   path('search/',views.search,name='search')
+   path('search/',views.search,name='search'),
+   path('business/new',views.new_business,name='new_business')
 ]

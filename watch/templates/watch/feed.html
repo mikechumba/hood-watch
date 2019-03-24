@@ -1,113 +1,88 @@
 {% extends "watch/layout.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
    {% include "watch/nav.html" %}
 
-   <div class="page">
+   <div id="page"></div>
 
-      {% include "watch/sidebar.html" %}
+   <div class="content">
 
-      <div class="main">
-         <div class="content">
-            <div class="top">
-               <div class="current-hood">
-                  <div class="icon-md">
-                     <img src="{% static 'svg/map-pin-stroke-white.svg' %}" alt="">
-                  </div>
-                  <p>{{user.profile.neighbourhood.name }}</p>
-               </div>
-               <div class="new-post-btn">
-                  <a href="{% url 'new_post' %}">
-                     <button><img src="{% static 'svg/plus-alt.svg' %}" alt=""> Add Post</button>
-                  </a>
-               </div>
-            </div>
-            <div class="posts">
-              
-               <div class="alerts">
-                  <div class="post-icon">
-                     <div class="icon">
-                        <img src="{% static 'svg/warning.svg' %}" alt="">
-                     </div>
-                     <p>Alerts</p>
-                  </div>
-                  {% for alert in alerts  %}
-                     <div class="post-card-sm">
-                        <div class="author">
-                           <div class="avatar-sm">
-                              <img src="{{ alert.author.avatar.url }}" alt="">
-                           </div>
-                           <p>{{ alert.author.user.first_name }} {{ alert.author.user.last_name }}</p>
-                        </div>
-                        <div class="post-content">
-                           <p>{{ alert.content }}</p>
-                        </div>
-                        <div class="post-comments">
-                           <p>{{ alert.comment_set.count }} comments</p>
-                        </div>
-                     </div>
-                  {% endfor %}
-               </div>
+      <div class="updates">
 
-               <div class="general">
-                  <div class="post-icon">
-                     <div class="icon">
-                        <img src="{% static 'svg/spin.svg' %}" alt="">
-                     </div>
-                     <p>General</p>
-                  </div>
-                  {% for general in general  %}
-                     <div class="post-card-sm">
-                        <div class="author">
-                           <div class="avatar-sm">
-                              <img src="{{ general.author.avatar.url }}" alt="">
-                           </div>
-                           <p>{{ general.author.user.first_name }} {{ general.author.user.last_name }}</p>
-                        </div>
-                        <div class="post-content">
-                           <p>{{ general.content }}</p>
-                        </div>
-                        <div class="post-comments">
-                           <p>{{ general.comment_set.count }} comments</p>
-                        </div>
-                     </div>
-                  {% endfor %}
-               </div>
+         <h3>{{ user.profile.neighbourhood }}</h3>
 
-               <div class="announcement">
-                  <div class="post-icon">
-                     <div class="icon">
-                        <img src="{% static 'svg/calendar.svg' %}" alt="">
-                     </div>
-                     <p>Announcements</p>
-                  </div>
-                  {% for ann in announcements  %}
-                     <div class="post-card-sm">
-                        <div class="author">
-                           <div class="avatar-sm">
-                              <img src="{{ ann.author.avatar.url }}" alt="">
-                           </div>
-                           <p>{{ ann.author.user.first_name }} {{ ann.author.user.last_name }}</p>
-                        </div>
-                        <div class="post-content">
-                           <p>{{ ann.content }}</p>
-                        </div>
-                        <div class="post-comments">
-                           <p>{{ ann.comment_set.count }} comments</p>
-                        </div>
-                     </div>
-                  {% endfor %}
-               </div>
-   
-   
-
-            </div>
+         <div class="add">
+            <a href="">
+               <button>Add Post</button>
+            </a>
          </div>
+
+
+         <div class="hood-posts">
+
+            <h3>Updates</h3>
+            <div class="posts">
+
+               {% for post in posts  %}
+                  {% if post.category == 'Alert' %}
+                     {% trans "red" as txt_color %}
+                  {% else %}
+                     {% trans "normal" as txt_color %}
+                  {% endif %}
+                  
+                  <div class="post-card">
+                     <p class="{{ txt_color }}">{{ post.category }}</p>
+                     <p class="post-content">{{ post.content }}</p>
+                     <div class="author">
+                        <div class="avatar-sm">
+                           <img src="{{ post.author.avatar.url }}" alt="">
+                        </div>
+                        <p>{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+
+         </div>
+
       </div>
 
    </div>
 
-  
+   <div class="sidebar">
+      <div class="profile">
+         <div class="avatar-lg">
+            <img src="{{ user.profile.avatar.url }}" alt="">
+         </div>
+      </div>
+      <div class="hood">
+         <h3>{{ hood.name }}</h3>
+         <h5>{{ hood.location }}</h5>
+         <div class="amenities">
+            {% for amenity in amenities  %}
+               <h5>{{ amenity.name }}</h5>
+               <p>{{ amenity.category }}</p>
+               <div class="contacts">
+                  <p>{{ amenity.tel }}</p>
+                  <p>{{ amenity.email }}</p>
+               </div>
+            {% endfor %}
+         </div>
+         <div class="amenities">
+            {% for business in businesses  %}
+               <h5>{{ business.name }}</h5>
+               <p>{{ business.category }}</p>
+               <div class="contacts">
+                  <p>{{ business.tel }}</p>
+                  <p>{{ business.email }}</p>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+
+   
 {% endblock content %}

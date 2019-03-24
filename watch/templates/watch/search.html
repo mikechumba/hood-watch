@@ -19,7 +19,7 @@
                   <p>{{user.profile.neighbourhood.name }}</p>
                </div>
                <div class="new-post-btn">
-                  <a href="{% url 'new_post' %}">
+                  <a href="{% url 'new_business' %}">
                      <button><img src="{% static 'svg/plus-alt.svg' %}" alt=""> Add Business</button>
                   </a>
                </div>
@@ -27,16 +27,12 @@
             <div class="posts">
               
                <div class="businesses">
-                  <div class="post-icon">
-                     <div class="icon">
-                        <img src="{% static 'svg/warning.svg' %}" alt="">
-                     </div>
                      <p>Alerts</p>
                   </div>
                   {% for biz in businesses  %}
                      <div class="post-card-sm">
                         <h4>{{ biz.name }}</h4>
-                        <p>{{ biz.category }}</p>
+                        <p>{{ biz.category.name }}</p>
                      </div>
                   {% endfor %}
                </div>

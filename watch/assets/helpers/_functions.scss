@@ -7,8 +7,10 @@ $font-sizes: (
 );
 
 $colors: (
-   'prmry': #13F198,
-   'scndry': #34BCEF,
+   'prmry': #0E0E10,
+   'scndry': #D10015,
+   's2': #D62834,
+   'p2': #141414,
 );
 
 @function fz($value) {

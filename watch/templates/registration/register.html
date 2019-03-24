@@ -1,0 +1,18 @@
+{% extends "watch/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+   <div class="auth-form">
+      <h1>Keep up with what's going on in your hood.</h1>
+      <form action="" method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button class="btn" type="submit">Login</button>
+      </form>
+      <div class="auth-check">
+         <p>Have an Account? <a href="{% url 'login' %}">Log In</a></p>
+      </div>
+   </div>
+  
+{% endblock content %}
