@@ -23,6 +23,27 @@ class Neighbourhood(models.Model):
    def __str__(self):
       return self.name
 
+   def create_neighbourhood(self):
+      return self.save()
+
+   def delete_neighbourhood(self):
+      return self.delete()
+
+   @classmethod
+   def find_neighbourhood(cls,id):
+      hood = cls.objects.filter(pk=id).first()
+      return hood
+   
+   def update_neighbourhood(self):
+      return self.save()
+
+   @classmethod
+   def update_occupants(cls,id):
+      hood = cls.objects.filter(pk=id).first()
+      occupants = hood.profile_set
+      return occupants
+
+
 class Profile(models.Model):
    '''
    Holds user's profile data.
