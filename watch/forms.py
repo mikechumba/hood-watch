@@ -77,7 +77,8 @@ class AmenitiesForm(forms.ModelForm):
       ('Hospital','Hospital'),
       ('Police','Police'),
       ('Park','Park'),
-      ('School','School')
+      ('School','School'),
+      ('Fire Department', 'Fire Department')
    )
    amenity_type = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
    class Meta:

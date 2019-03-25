@@ -81,6 +81,7 @@ nav {
    }
 
    button {
+      cursor: pointer;
       background-color: clr(prmry);
       align-self: center;
       @include fonts(#fff,fx(s),600);
@@ -167,7 +168,7 @@ nav {
 }
 
 .auth-form {
-   width: 30%;
+   width: 24%;
    margin: 5% auto;
 
    h1 {
@@ -185,9 +186,18 @@ nav {
    }
 
    button {
-      width: 30%;
+      cursor: pointer;
+      width: auto;
       text-align: center;
       margin: 0 auto;
+   }
+
+   p {
+      @include fonts(clr(p2),fz(s),500);
+   }
+
+   select {
+      width: 100%
    }
 }
 
@@ -204,6 +214,29 @@ nav {
 
 .auth-check > p {
    text-align: center;
+}
+
+.hood {
+   > h3 {
+      margin: 0.5% 0;
+      @include fonts(clr(prmry),fz(l),600);
+   }
+   > h5 {
+      margin: 0.5% 0;
+      @include fonts(clr(prmry),fz(s),500);
+   }
+}
+
+.hood-image {
+   width: 180px;
+   height: 220px;
+   overflow: hidden;
+   border-radius: 5px;
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+   }
 }
 
 .business {
@@ -232,4 +265,59 @@ nav {
 
 a {
    @include fonts(clr(s2),fz(s),600);
+}
+
+h5.title {
+   margin: 6% 0;
+   @include fonts(clr(prmry),fz(m),700);
+}
+
+.profile-card {
+   display: flex;
+   height: 220px;
+}
+
+.bg-front {
+   align-self: center;
+   width: 5%;
+   background-color: rgba(clr(s2),0.2);
+   height: 96%;
+   border-radius: 0 4px 4px 0
+}
+
+.bg-back {
+   align-self: center;
+   width: 4%;
+   background-color: rgba(clr(s2),0.1);
+   height: 89%;
+   border-radius: 0 4px 4px 0
+}
+
+#profile-btn {
+   cursor: pointer;
+}
+
+.profile-options {
+   display: none;
+   position: fixed;
+   right: 0;
+   top: 8%;
+   margin-right: 2%;
+   width: 6%;
+   background-color: #fff;
+   box-shadow: 1px 1px 4px 1px rgba(#E8E8E7,0.5);
+   p {
+      padding: 4%;
+      margin: 1% 0;
+      text-align: center;
+   }
+
+   a {
+      text-decoration: none;
+   }
+}
+
+h3.but {
+   padding: 0 1%;
+   @include fonts(clr(s2),fz(m),500);
 }

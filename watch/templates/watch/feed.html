@@ -29,7 +29,9 @@
 
             <h3>Updates</h3>
             <div class="posts">
-
+            {% if posts %}
+              
+            
                {% for post in posts  %}
                   {% if post.category == 'Alert' %}
                      {% trans "red" as txt_color %}
@@ -48,8 +50,13 @@
                      </div>
                   </div>
                {% endfor %}
-            </div>
+            
+            {% else %}
+               <h3 class='but'>There are no updates in this neighbourhood.</h3>
+            {% endif %}
 
+            </div>
+            
          </div>
 
       </div>
@@ -57,15 +64,20 @@
    
 
       <div class="sidebar">
-         <div class="profile">
-            <div class="avatar-lg">
-               <img src="{{ user.profile.avatar.url }}" alt="">
-            </div>
-         </div>
+      
          <div class="hood">
+            <div class="profile-card">
+               <div class="hood-image">
+                  <img src="{% static 'images/rainbow.jpg' %}" alt="">
+               </div>
+               <div class="bg-front"></div>
+               <div class="bg-back"></div>
+            </div>
+
             <h3>{{ hood.name }}</h3>
             <h5>{{ hood.location }}</h5>
-            <div class="amenities">
+            <h5 class="title">Amenities</h5>
+            <div class="business">
                {% for amenity in amenities  %}
                   <h5>{{ amenity.name }}</h5>
                   <p>{{ amenity.category }}</p>
@@ -74,8 +86,11 @@
                      <p>{{ amenity.email }}</p>
                   </div>
                {% endfor %}
+               <a href="{% url 'new_amenity' %}">Add a Public Amenity</a>
             </div>
+            
 
+            <h5 class="title">Businesses</h5>
             {% for business in businesses  %}
                <div class="business">
                      <h5>{{ business.name }}</h5>
@@ -86,7 +101,7 @@
                      </div>
                </div>
             {% endfor %}
-            <a href="">Add a Business</a>
+            <a href="{% url 'new_business' %}">Add a Business</a>
          </div>
 
       </div>

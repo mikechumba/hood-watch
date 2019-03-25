@@ -30,7 +30,8 @@ def feed(request):
       'posts': posts,
       'businesses': businesses,
       'amenities': amenities,
-      'form': form
+      'form': form,
+      'hood': hood
    }
 
    return render(request,'watch/feed.html',context)
@@ -164,18 +165,51 @@ def edit_profile(request):
 
    return render(request,'dash/edit_profile.html',context)
 
+def new_hood(request):
 
-def profile(request):
+   title = "Add new neighbourhood"
 
-   user = request.user
-
-   title = f'{user.first_name} {user.last_name}'
+   if request.method == 'POST':
+      form = NeighbourhoodForm(request.POST)
+      if form.is_valid():
+         hood = form.save(commit=False)
+         hood.admin = request.user
+         hood.save()
+         profile = request.user.profile
+         profile.neighbourhood = hood
+         profile.save()
+         return redirect('feed')
+   else:
+      form = NeighbourhoodForm()
 
    context = {
+      'title': title,
+      'form': form
+   }
+
+   return render(request,'watch/new_hood.html',context)
+
+
+def new_amenity(request):
+
+   title = f'Add a New Business in {request.user.profile.neighbourhood}'
+
+   if request.method == 'POST':
+      form = AmenitiesForm(request.POST)
+      if form.is_valid():
+         amenity = form.save(commit=False)
+         amenity.hood = request.user.profile.neighbourhood
+         amenity.save()
+         return redirect('feed')
+   else:
+      form = AmenitiesForm()
+
+   context =  {
+      'form': form,
       'title': title
    }
 
-   return render(request,'watch/profile.html',context)
+   return render(request,'watch/new_amenity.html',context)
 
 
 def logout_view(request):

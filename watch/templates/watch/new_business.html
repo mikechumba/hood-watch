@@ -5,16 +5,16 @@
 
    {% include "watch/nav.html" %}
 
-   <div class="page">
-
-      <div class="form">
-         <form action="" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit">Post</button>
-         </form>
+   <div class="auth-form">
+      <h1>Add a Business</h1>
+      <form action="" method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button class="btn" type="submit">Add Business</button>
+      </form>
+      <div class="auth-check">
+         <p></p>
       </div>
-
    </div>
   
 {% endblock content %}
