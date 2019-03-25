@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 
 # Create your views here.
+@login_required(login_url='register')
 def feed(request):
 
    hood = request.user.profile.neighbourhood
@@ -36,16 +38,7 @@ def feed(request):
 
    return render(request,'watch/feed.html',context)
 
-def dashboard(request):
-
-   title = f'Dashboard'
-
-   context = {
-      'title': title
-   }
-
-   return render(request,'watch/dashboard.html',context)
-
+@login_required(login_url='register')
 def hood_change(request):
 
    title = f'Change Neighbourhood'
@@ -56,31 +49,8 @@ def hood_change(request):
 
    return render(request,'dash/hood_change.html',context)
 
-def new_post(request):
 
-   hood = request.user.profile.neighbourhood
-
-   title = f"New Post in {hood}"
-
-   if request.method == 'POST':
-      form = PostForm(request.POST)
-      if form.is_valid():
-         post = form.save(commit=False)
-         post.author = request.user.profile
-         post.hood = request.user.profile.neighbourhood
-         post.save()
-         return redirect('feed')
-   else:
-      form = PostForm()
-   
-   context = {
-      'title': title,
-      'form': form,
-   }
-
-   return render(request,'watch/new_post.html',context)
-
-
+@login_required(login_url='register')
 def new_business(request):
 
    title = f'Add a New Business in {request.user.profile.neighbourhood}'
@@ -144,6 +114,8 @@ def register(request):
 
    return render(request,'registration/register.html',context)
 
+
+@login_required(login_url='register')
 def edit_profile(request):
 
    title = 'Edit Profile'
@@ -165,6 +137,7 @@ def edit_profile(request):
 
    return render(request,'dash/edit_profile.html',context)
 
+@login_required(login_url='register')
 def new_hood(request):
 
    title = "Add new neighbourhood"
@@ -189,7 +162,7 @@ def new_hood(request):
 
    return render(request,'watch/new_hood.html',context)
 
-
+@login_required(login_url='register')
 def new_amenity(request):
 
    title = f'Add a New Amenity in {request.user.profile.neighbourhood}'
@@ -211,7 +184,7 @@ def new_amenity(request):
 
    return render(request,'watch/new_amenity.html',context)
 
-
+@login_required(login_url='register')
 def logout_view(request):
    logout(request)
    return redirect('login')

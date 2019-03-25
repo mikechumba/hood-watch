@@ -10,7 +10,6 @@ urlpatterns = [
    path('logout/',views.logout_view,name='logout'),
    path('neighbourhood/new',views.new_hood,name='new_hood'),
    path('amenity/new',views.new_amenity,name='new_amenity'),
-   path('post/new',views.new_post,name='new_post'),
    path('profile/edit',views.edit_profile,name='edit_profile'),
    path('search/',views.search,name='search'),
    path('business/new',views.new_business,name='new_business')
