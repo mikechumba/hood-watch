@@ -103,7 +103,7 @@ def register(request):
          login(request,user)
          profile = Profile(user=user)
          profile.save()
-         return redirect('landing')
+         return redirect('edit_profile')
    else:
       form = Registration()
 
