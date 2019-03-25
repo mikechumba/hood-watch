@@ -126,7 +126,7 @@ def edit_profile(request):
       form = ProfileUpdateForm(request.POST,request.FILES,instance=user.profile)
       if form.is_valid():
          form.save()
-         return redirect('profile')
+         return redirect('feed')
    else:
       form = ProfileUpdateForm(instance=user.profile)
 
