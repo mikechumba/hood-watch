@@ -74,6 +74,7 @@ class AmenitiesForm(forms.ModelForm):
    To add public amenities.
    '''
    CATEGORIES = (
+      ('', 'Select a Category'),
       ('Hospital','Hospital'),
       ('Police','Police'),
       ('Park','Park'),
@@ -83,7 +84,7 @@ class AmenitiesForm(forms.ModelForm):
    amenity_type = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
    class Meta:
       model = Amenities
-      fields = ['name','tel','email','amenity_type','hood']
+      fields = ['name','tel','email','amenity_type']
 
 class CommentForm(forms.ModelForm):
    '''

@@ -192,7 +192,7 @@ def new_hood(request):
 
 def new_amenity(request):
 
-   title = f'Add a New Business in {request.user.profile.neighbourhood}'
+   title = f'Add a New Amenity in {request.user.profile.neighbourhood}'
 
    if request.method == 'POST':
       form = AmenitiesForm(request.POST)
