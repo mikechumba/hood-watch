@@ -14,11 +14,23 @@ def feed(request):
    businesses = Business.objects.filter(hood=hood)
    amenities = Amenities.objects.filter(hood=hood)
 
+   if request.method == 'POST':
+      form = PostForm(request.POST)
+      if form.is_valid():
+         post = form.save(commit=False)
+         post.author = request.user.profile
+         post.hood = request.user.profile.neighbourhood
+         post.save()
+         return redirect('feed')
+   else:
+      form = PostForm()
+
    context = {
       'title': title,
       'posts': posts,
       'businesses': businesses,
-      'amenities': amenities
+      'amenities': amenities,
+      'form': form
    }
 
    return render(request,'watch/feed.html',context)

@@ -60,14 +60,14 @@ class PostForm(forms.ModelForm):
       ('General','General'),
       ('Announcement','Announcement'),
    )
+
+   content =  forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'What\'s new?'}))
    category = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
 
    class Meta:
       model = Post
       fields = ['content','category']
-      widget = {
-         'content': forms.TextInput(attrs={'placeholder': 'Add a Post'}),
-      }
+
 
 class AmenitiesForm(forms.ModelForm):
    '''
