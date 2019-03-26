@@ -73,22 +73,6 @@ def new_business(request):
 
    return render(request,'watch/new_business.html',context)
 
-def search(request):
-
-   if 'biz_search' in request.GET and request.GET['biz_search']:
-      searched = request.GET.get('biz_search')
-      if searched:
-         businesses = Business.objects.filter(name__icontains=searched).all()
-         title = f'Your search {searched} returned'
-
-   context = {
-      'businesses': businesses,
-      'title': title,
-      'searched': searched
-   }
-
-   return render(request,'watch/search.html')
-
 def register(request):
 
    title = 'Sign Up'

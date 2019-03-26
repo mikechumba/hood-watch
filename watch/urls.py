@@ -11,6 +11,5 @@ urlpatterns = [
    path('neighbourhood/new',views.new_hood,name='new_hood'),
    path('amenity/new',views.new_amenity,name='new_amenity'),
    path('profile/edit',views.edit_profile,name='edit_profile'),
-   path('search/',views.search,name='search'),
    path('business/new',views.new_business,name='new_business')
 ]
