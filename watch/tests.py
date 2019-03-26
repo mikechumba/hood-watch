@@ -19,7 +19,7 @@ def create_category_instance():
    category = Category(name='This is category')
    return category
 
-def create_business_instance(hood,ctgry,prfl):
+def create_business_instance():
    business = Business(name='A Biz',email='biz@email.com',tel=25495034,hood_id=1,category_id=1,owner_id=1)
    return business
 
@@ -125,10 +125,10 @@ class Business(TestCase):
       self.new_profile.save()
       self.new_category = create_category_instance()
       self.new_category.save()
-      self.new_business = create_business_instance(self.new_hood,self.new_category,self.new_profile)
+      self.new_business = create_business_instance()
 
-   # def test_business_instance(self):
-   #    self.assertTrue(isinstance(self.new_business,Business))
+   def test_business_instance(self):
+      self.assertTrue(isinstance(self.new_business,Business))
 
    # def test_save_business(self):
    #    self.new_business.save()
