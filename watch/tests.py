@@ -125,15 +125,10 @@ class Business(TestCase):
       self.new_profile.save()
       self.new_category = create_category_instance()
       self.new_category.save()
-      self.new_business = create_business_instance()
+      self.new_business = Business()
 
    def test_business_instance(self):
       self.assertTrue(isinstance(self.new_business,Business))
-
-   # def test_save_business(self):
-   #    self.new_business.save()
-   #    businesses = Business.objects.all()
-   #    self.assertTrue(len(businesses),1)
 
 
 class AmenityTest(TestCase):
