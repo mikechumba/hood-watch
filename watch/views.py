@@ -126,7 +126,7 @@ def search(request):
    if 'biz_search' in request.GET and request.GET['biz_search']:
       searched = request.GET.get('biz_search')
       if searched:
-         businesses = Business.objects.filter(name__icontains=searched)
+         businesses = Business.objects.filter(name__icontains=searched,hood=request.user.profile.neighbourhood)
          title = f'You searched for {searched}'
 
    context = {
