@@ -5,9 +5,17 @@
          <img src="{% static 'svg/map-pin-stroke.svg' %}" alt="">
       </a>
    </div>
+   <div class="search">
+      <div class="icon">
+         <img src="{% static 'svg/path-1445.svg' %}" alt="">
+      </div>
+      <form action="{% url 'search' %}" method="get">
+         <input type="text" name="biz_search" placeholder="Search">
+      </form>
+   </div>
    <div class="avatar-sm" id="profile-btn">
       <img src="{{ user.profile.avatar.url }}" alt="">
-   </div>
+   </div>   
 
    <div class="profile-options">
       <p><a href="{% url 'edit_profile' %}">

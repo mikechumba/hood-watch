@@ -121,6 +121,22 @@ def edit_profile(request):
 
    return render(request,'dash/edit_profile.html',context)
 
+def search(request):
+
+   if 'biz_search' in request.GET and request.GET['biz_search']:
+      searched = request.GET.get('biz_search')
+      if searched:
+         businesses = Business.objects.filter(name__icontains=searched)
+         title = f'You searched for {searched}'
+
+   context = {
+      'businesses': businesses,
+      'title': title,
+      'searched': searched
+   }
+
+   return render(request,'watch/search.html',context)
+
 @login_required(login_url='register')
 def new_hood(request):
 
